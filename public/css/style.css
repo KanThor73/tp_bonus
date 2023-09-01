@@ -1,0 +1,86 @@
+/*base*/
+
+*{
+    box-sizing: border-box;
+    margin: 0rem;
+    padding: 0rem;
+}
+
+body{
+    min-height: 100vh;
+    font-family: "Book Antiqua";
+    background: url("../img/pexels-pixabay-235985.jpg");
+}
+
+/*home*/
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    text-shadow:0 1px 5px white;
+}
+
+h1{
+    text-align: center;
+}
+
+li{
+   list-style: none;
+}
+
+header{
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    background: linear-gradient(360deg, #4f5250 0%, #d1ccc0 100%);
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: 0 1px 5px #101010;
+    margin-bottom: 4rem;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.body-block{
+    height: 100%;
+    background: linear-gradient(360deg, #4f5250 0%, #d1ccc0 100%);
+    border-radius: 1rem;
+    padding: 2rem 3rem;
+    box-shadow: 0 1px 5px #101010;
+
+}
+
+.product-item{
+    display:flex ;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0rem;
+}
+
+.edit{
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 0.5rem;
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.edit:hover{
+    border: 1px solid white;
+    color: white;
+    box-shadow: 0 1px 5px white;
+}
+
+.label{
+    font-size: 1rem;
+    font-weight: bold;
+}

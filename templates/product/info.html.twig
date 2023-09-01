@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}INFO PRODUIT{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/info.css') }}">
+{% endblock %}
+{% block body %}
+
+    <div class="product-list">
+            <h1>{{ product.label }}</h1>
+        <div class="product-content">
+            <div class="product-item">
+                <h3>Reference</h3>
+                <p>{{ product.reference }}</p>
+
+            </div>
+            <div class="product-item">
+                <h3>Description</h3>
+                <p>{{ product.description }}</p>
+
+            </div>
+            <div class="product-item">
+                <h3>Prix</h3>
+                <p>{{ product.price }}</p>
+
+            </div>
+            <div class="product-item">
+                <h3>Stock</h3>
+                <p>{{ product.stock }}</p>
+
+            </div>
+            <div class="product-item">
+                <h3>Categorie</h3>
+                <p>{{ libelle }}</p>
+            </div>
+            <div class="product-item">
+                <h3>Date de creation</h3>
+                <span>{{ product.getDateAdd() | format_datetime('long', locale='fr')}}</span>
+            </div>
+            <div class="product-item">
+                <h3>Date derniere edition</h3>
+                <span>{{ product.getDateEdit() | format_datetime('long', locale='fr') }}</span>
+            </div>
+        </div>
+        <a class="btn" href="{{ path('edit',{id: product.id }) }}">MODIFIER</a>
+        <a class="btn" href="{{ path('delete',{id: product.id }) }}">SUPPRIMER</a>
+    </div>
+{% endblock %}
