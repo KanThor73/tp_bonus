@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Categories;
 use App\Entity\Products;
+use App\Entity\SousCategories;
 use App\Form\ProductsType;
+use App\Form\SousCategoriesType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,25 +24,30 @@ class ProductController extends AbstractController
         $productForm = $this->createForm(ProductsType::class, $product);
         $productForm->handleRequest($request);
 
-        $categoriesRepo = $entityManager->getRepository(Categories::class);
-        $categories = $categoriesRepo->findAll();
+//        $categoriesRepo = $entityManager->getRepository(Categories::class);
+//        $categories = $categoriesRepo->findAll();
+//
+//        $sousCategoriesRepo = $entityManager->getRepository(SousCategories::class);
+//        $sousCategories = $sousCategoriesRepo->findAll();
 
         if ($productForm->isSubmitted() && $productForm->isValid()) {
             $product->setDateAdd(new \DateTime());
             $product->setDateEdit(new \DateTime());
 
-            $idCategorie = $request->get('categories');
-            $categorie = $categoriesRepo->find($idCategorie);
-            $categorie->addProduct($product);
+//            $idCategorie = $request->get('categories');
+//            $categorie = $categoriesRepo->find($idCategorie);
+//            $categorie->addProduct($product);
 
             $entityManager->persist($product);
-            $entityManager->persist($categorie);
+//            $entityManager->persist($categorie);
             $entityManager->flush();
+            $request->getSession()->getFlashBag()->add('succes','Produit ajoute avec succes');
             return $this->redirectToRoute('home');
         }
         return $this->render('product/index.html.twig', [
             'form' => $productForm->createView(),
-            'categories' => $categories
+//            'categories' => $categories,
+//            'sousCategories' => $sousCategories
         ]);
     }
 

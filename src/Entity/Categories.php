@@ -6,6 +6,8 @@ use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Symfony\Component\HttpFoundation\Request;
 
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
 class Categories
@@ -15,18 +17,20 @@ class Categories
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, options: ['default' => 'aucune' ])]
     private ?string $libelle = null;
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Products::class)]
     private Collection $products;
 
-    #[ORM\ManyToOne(inversedBy: 'categories')]
-    private ?SousCategories $parent = null;
+    #[ORM\OneToMany(mappedBy: 'categories', targetEntity: SousCategories::class, orphanRemoval: true)]
+    private Collection $parent;
+
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->parent = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,15 +80,35 @@ class Categories
         return $this;
     }
 
-    public function getParent(): ?SousCategories
+    /**
+     * @return Collection<int, SousCategories>
+     */
+    public function getParent(): Collection
     {
         return $this->parent;
     }
 
-    public function setParent(?SousCategories $parent): static
+    public function addParent(SousCategories $parent): static
     {
-        $this->parent = $parent;
+        if (!$this->parent->contains($parent)) {
+            $this->parent->add($parent);
+            $parent->setCategories($this);
+        }
 
         return $this;
     }
+
+    public function removeParent(SousCategories $parent): static
+    {
+        if ($this->parent->removeElement($parent)) {
+            // set the owning side to null (unless already changed)
+            if ($parent->getCategories() === $this) {
+                $parent->setCategories(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

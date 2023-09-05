@@ -8,79 +8,123 @@
 
 body{
     min-height: 100vh;
-    font-family: "Book Antiqua";
-    background: url("../img/pexels-pixabay-235985.jpg");
+    font-family: 'Noto Sans', sans-serif;
+    background: url("../img/2249400.jpg") center center;
+    background-size: cover;
+    color:#84817a;
 }
 
-/*home*/
+/*general*/
+
+.mg-d1{
+    margin-bottom: 1rem;
+}
 
 a{
     text-decoration: none;
-    color: black;
+    color: #84817a;
 }
 
 a:hover{
-    text-shadow:0 1px 5px white;
+    color: #aaa69d;
 }
 
 h1{
     text-align: center;
+    border-bottom: 2px solid #1e1f23;
+    padding-bottom: 0.6rem;
 }
 
 li{
    list-style: none;
 }
 
-header{
-    display: flex;
-    justify-content: space-around;
-    padding: 1rem;
-    background: linear-gradient(360deg, #4f5250 0%, #d1ccc0 100%);
-    font-size: 2rem;
-    font-weight: bold;
-    box-shadow: 0 1px 5px #101010;
-    margin-bottom: 4rem;
-}
-
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.body-block{
-    height: 100%;
-    background: linear-gradient(360deg, #4f5250 0%, #d1ccc0 100%);
-    border-radius: 1rem;
-    padding: 2rem 3rem;
-    box-shadow: 0 1px 5px #101010;
-
-}
-
-.product-item{
-    display:flex ;
-    justify-content: space-between;
-    align-items: center;
-    margin: 2rem 0rem;
-}
-
 .edit{
     font-weight: bold;
-    border: 1px solid black;
     padding: 0.5rem;
     border-radius: 3px;
     background: transparent;
     cursor: pointer;
+    border: 1px solid #1e1f23;
+    color: #84817a;
 }
 
 .edit:hover{
-    border: 1px solid white;
-    color: white;
-    box-shadow: 0 1px 5px white;
+    border: 1px solid #aaa69d;
+    color: #aaa69d;
 }
 
 .label{
     font-size: 1rem;
     font-weight: bold;
 }
+
+input, textarea, select{
+    border-radius: 0.2rem;
+    background: #e0e0e0;
+}
+
+.body-block{
+    height: 100%;
+    background: #020202;
+    color: #84817a;
+    border-radius: 0.3rem;
+    padding: 2rem 3rem;
+    box-shadow: 0 1px 5px #101010;
+}
+
+/*header*/
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    margin: 0rem 2rem 4rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-bottom: 2px solid #1e1f23;
+    position: sticky;
+}
+
+.separator{
+    margin: 0rem 1rem;
+    border-right: 2px solid #1e1f23 ;
+}
+
+/*home*/
+
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+}
+
+.container-title{
+    margin-bottom: 2rem;
+}
+
+.product-list{
+    display: flex;
+}
+
+.product-item{
+    display:flex ;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    margin: 2rem 1rem;
+    background: #04051a;
+    width: 13rem;
+    height: 15rem;
+    border:1px solid #1e1f23;
+    row-gap: 1rem;
+}
+
+

@@ -8,7 +8,10 @@
 {% block title %}CREER{% endblock %}
 
 {% block body %}
-    <h1>CREER UN PRODUIT</h1>
+    <div class="container-title">
+        <h1>{{ 'CREER UN PRODUIT' | capitalize}}</h1>
+
+    </div>
     <div class="form-container">
         {{ form_start(form) }}
         <div class="form-row">
@@ -42,16 +45,29 @@
         </div>
         <div class="error">{{ form_errors(form.published) }}</div>
         <div class="form-row">
-            <label for="categories">CATEGORIES</label>
-            <select name="categories" id="categories">
-                {% for categorie in categories %}
-                    <option value="{{ categorie.id }}"> {{ categorie.libelle | upper }}</option>
-                {% endfor %}
-            </select>
+            {{ form_label(form.categorie) }}
+            {{ form_widget(form.categorie) }}
         </div>
+        <div class="error">{{ form_errors(form.categorie) }}</div>
+{#        <div class="form-row">#}
+{#            {{ form_label(form.sousCategorie) }}#}
+{#            {{ form_widget(form.sousCategorie) }}#}
+{#        </div>#}
+{#        <div class="error">{{ form_errors(form.sousCategorie) }}</div>#}
         <div class="btn">
             <button class="edit" type="submit">AJOUTER</button>
         </div>
         {{ form_end(form, {'render_rest': false}) }}
     </div>
 {% endblock %}
+
+
+
+{#        <div class="form-row">#}
+{#            <label for="categories">CATEGORIES</label>#}
+{#            <select name="categories" id="categories">#}
+{#                {% for categorie in categories %}#}
+{#                    <option value="{{ categorie.id }}"> {{ categorie.libelle | upper }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}

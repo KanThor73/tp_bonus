@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategorieController extends AbstractController
 {
     #[Route('/categorie', name: 'create_categorie')]
-    public function createCategorie( Request $request, EntityManagerInterface $entityManager): Response
+    public function createCategorie(Request $request, EntityManagerInterface $entityManager): Response
     {
         $categorie = new Categories();
 
@@ -44,24 +44,21 @@ class CategorieController extends AbstractController
     public function createSousCategorie(Categories $categorie, Request $request, EntityManagerInterface $entityManager): Response
     {
         $sousCategorie = new SousCategories();
-
-
         $sousCategoriesForm = $this->createForm(SousCategoriesType::class, $sousCategorie);
-        $categorieRepo = $entityManager->getRepository(Categories::class);
 
-        $sousCategories = $categorie->
-
-        // faire une requete pour n'afficher que les souscat de la cat selec
+        $sousCategories = $categorie->getParent();
 
         $sousCategoriesForm->handleRequest($request);
 
         if ($sousCategoriesForm->isSubmitted() && $sousCategoriesForm->isValid()) {
+            $sousCategorie->setCategories($categorie);
             $entityManager->persist($sousCategorie);
             $entityManager->flush();
         }
         return $this->render('categorie/sous-categorie.html.twig', [
             'sousCatForm' => $sousCategoriesForm->createView(),
-            'sousCategories' => $sousCategories
+            'sousCategories' => $sousCategories,
+            'categorie' => $categorie
         ]);
     }
 }
