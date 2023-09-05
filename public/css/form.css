@@ -33,3 +33,8 @@ button{
 .categorie-list ul li{
     list-style: disc;
 }
+
+.error{
+    text-align: center;
+    color: darkred;
+}

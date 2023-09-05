@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoriesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
@@ -18,6 +20,10 @@ class Categories
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Products::class)]
     private Collection $products;
+
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    private ?SousCategories $parent = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -27,7 +33,6 @@ class Categories
     {
         return $this->id;
     }
-
 
     public function getLibelle(): ?string
     {
@@ -42,31 +47,44 @@ class Categories
     }
 
     /**
-     * @return Collection<int, Categories>
+     * @return Collection<int, Products>
      */
     public function getProducts(): Collection
     {
-        return $this->product;
+        return $this->products;
     }
 
-    public function addCategory(Products $products): static
+    public function addProduct(Products $product): static
     {
-        if (!$this->products->contains($products)) {
-            $this->products->add($products);
-            $products->setCategorie($this);
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setCategorie($this);
         }
+
         return $this;
     }
 
-    public function removeCategory(Products $products): static
+    public function removeProduct(Products $product): static
     {
-        if ($this->products->removeElement($products)) {
+        if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($products->getCategorie() === $this) {
-                $products->setCategorie(null);
+            if ($product->getCategorie() === $this) {
+                $product->setCategorie(null);
             }
         }
+
         return $this;
     }
 
+    public function getParent(): ?SousCategories
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?SousCategories $parent): static
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
 }

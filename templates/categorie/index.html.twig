@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+{% endblock %}
+
+{% block title %}CREER{% endblock %}
+
+{% block body %}
+    <h1>CREER UNE CATEGORIE</h1>
+    <div class="form-container">
+        {{ form_start(form) }}
+        <div class="form-row">
+            {{ form_label(form.libelle) }}
+            {{ form_widget(form.libelle) }}
+        </div>
+        <div class="btn">
+            <button class="edit" type="submit">AJOUTER</button>
+        </div>
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+    <h1>LISTE DES CATEGORIES</h1>
+    <div class="categorie-list">
+        <ul>
+            {% for categorie in categories %}
+                <li class="categorie-item">
+                    <p>{{ categorie.libelle | upper }}</p><a class="sous-categories" href="{{ path('create_sous-categorie',{id: categorie.id }) }}">AJOUTER SOUS-CATEGORIE</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

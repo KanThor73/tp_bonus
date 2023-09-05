@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+{% endblock %}
+
+{% block title %}CREER{% endblock %}
+
+{% block body %}
+    <h1>CREER UN PRODUIT</h1>
+    <div class="form-container">
+        {{ form_start(form) }}
+        <div class="form-row">
+            {{ form_label(form.reference) }}
+            {{ form_widget(form.reference) }}
+        </div>
+        <div class="error">{{ form_errors(form.reference) }}</div>
+        <div class="form-row">
+            {{ form_label(form.label) }}
+            {{ form_widget(form.label) }}
+        </div>
+        <div class="error">{{ form_errors(form.label) }}</div>
+        <div class="form-row">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+        <div class="error">{{ form_errors(form.description) }}</div>
+        <div class="form-row">
+            {{ form_label(form.price) }}
+            {{ form_widget(form.price) }}
+        </div>
+        <div class="error">{{ form_errors(form.price) }}</div>
+        <div class="form-row">
+            {{ form_label(form.stock) }}
+            {{ form_widget(form.stock) }}
+        </div>
+        <div class="error">{{ form_errors(form.stock) }}</div>
+        <div class="form-row">
+            {{ form_label(form.published) }}
+            {{ form_widget(form.published) }}
+        </div>
+        <div class="error">{{ form_errors(form.published) }}</div>
+        <div class="form-row">
+            <label for="categories">CATEGORIES</label>
+            <select name="categories" id="categories">
+                {% for categorie in categories %}
+                    <option value="{{ categorie.id }}"> {{ categorie.libelle | upper }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="btn">
+            <button class="edit" type="submit">AJOUTER</button>
+        </div>
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}
